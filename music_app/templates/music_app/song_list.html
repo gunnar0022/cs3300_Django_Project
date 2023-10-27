@@ -1,0 +1,23 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+    <h2>All Songs</h2>
+
+    <div class="mb-3">
+        <a href="{% url 'song_add' %}" class="btn btn-primary">Add New Song</a>
+    </div>
+
+    <ul class="list-group">
+        {% for song in songs %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+            <div>
+                <span class="badge bg-secondary">{{ song.instrument }}</span>
+                <span class="badge bg-info">{{ song.genre }}</span>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No songs available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

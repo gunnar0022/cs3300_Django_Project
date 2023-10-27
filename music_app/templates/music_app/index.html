@@ -1,13 +1,25 @@
-<!-- inherit from base.html-->
-{% extends "music_app/base_template.html" %}
+{% extends 'base_template.html' %}
 
 
-<!-- Replace block content in base_template.html -->
+
 {% block content %}
-<h1>Computer Science Portfolios</h1>
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Music App!</h1>
+        <p class="lead">Explore, share, and enjoy the world of music at your fingertips.</p>
+        <hr class="my-4">
+        <p>Discover the top trending songs and dive into the details.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'song_list' %}" role="button">Browse All Songs</a>
+    </div>
 
-
-<h2>More to come</h2>
-
-
+    <h2>Top 10 Songs</h2>
+    <ul class="list-group">
+        {% for song in songs %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+            <span class="badge bg-primary rounded-pill">{{ song.user_count }} Users</span>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No songs found.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
