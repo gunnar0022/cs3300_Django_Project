@@ -1,88 +1,135 @@
-/* Stylesheet.css */
-
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a2e;  /* deep blue with dark undertones */
-    color: #ffffff;  /* for good contrast */
-}
-
-/* Navbar Styles */
-.navbar {
-    background-color: #000033;  /* deep blue */
-    padding: 10px;
-    position: relative; /* If you decide to make it fixed, change this to "fixed" and top to 0 */
-}
-
-.navbar a.navbar-brand {
-    color: #ffffff;
-}
-
-.navbar-light .navbar-toggler-icon {
-    filter: invert(1); /* changes the icon color to white */
-}
-
-.navbar-nav .nav-link {
-    color: #ffffff;  /* for good contrast */
-    transition: color 0.3s;  /* subtle transition */
-}
-
-.navbar-nav .nav-link:hover {
-    color: #0099cc;  /* a shade of blue */
-}
-
-/* Main Content Styles */
-.container {
-    padding-top: 20px;  /* to prevent overlap with fixed navbar (if you decide to go that route) */
-}
-
-/* Footer Styles */
-footer {
-    background-color: #000033;  /* deep blue */
-    color: #ffffff;  /* for good contrast */
-}
-
-/* Web Accessibility Styles */
-img {
-    alt: "";  /* ensure all images have an alternative text */
-}
-
-/* Web Page Responsiveness */
-@media (max-width: 768px) {
     body {
-        font-size: 1rem; /* you can adjust this value */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* ensures the content takes up at least the full viewport height */
     }
-}
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    body {
-        font-size: 1.25rem; /* you can adjust this value */
+    .content-wrapper {
+        display: flex;
+        flex: 1; /* causes this container to grow and take up available space */
     }
-}
 
-/* Theme Styles */
-button, .btn {
-    background-color: #0099cc;  /* a shade of blue */
-    color: #ffffff;
-    transition: background-color 0.3s;  /* subtle transition */
-}
+    .btn-custom {
+        background-color: #4CAF50;  /* Green background */
+        border: none;               /* Remove default border */
+        color: white;              /* White text */
+        padding: 12px 20px;        /* Some padding */
+        text-align: center;        /* Centered text */
+        text-decoration: none;     /* Remove underline */
+        display: inline-block;     /* Inline-block */
+        font-size: 16px;           /* Increase font size */
+        margin: 4px 2px;           /* Some margin */
+        cursor: pointer;           /* Pointer/hand cursor on hover */
+        border-radius: 4px;        /* Rounded corners */
+        transition-duration: 0.4s; /* Transition for smooth hover effect */
+    }
+    
+    .btn-custom:hover {
+        background-color: #45a049;  /* Darker green on hover */
+    }
+    
+    .btn-delete {
+        background-color: #850000;  /* Green background */
+        border: none;               /* Remove default border */
+        color: white;              /* White text */
+        padding: 12px 20px;        /* Some padding */
+        text-align: center;        /* Centered text */
+        text-decoration: none;     /* Remove underline */
+        display: inline-block;     /* Inline-block */
+        font-size: 16px;           /* Increase font size */
+        margin: 4px 2px;           /* Some margin */
+        cursor: pointer;           /* Pointer/hand cursor on hover */
+        border-radius: 4px;        /* Rounded corners */
+        transition-duration: 0.4s; /* Transition for smooth hover effect */
+    }
 
-button:hover, .btn:hover {
-    background-color: #006699;  /* a darker shade of blue for hover effect */
-}
+    .btn-delete:hover {
+        background-color: #6c0000;  /* Darker green on hover */
+    }
+    
+    
 
-/* Log In/Log Out Styles */
-.logged-in {
-    background-color: #00cc66;  /* green to indicate logged-in status */
-}
+/* Style the navbar */
+    .navbar {
+        display: flex;
+       
+        align-items: center;
+        background-color: #10028f; /* Change this to your preferred navbar color */
+        padding: 1rem 2rem;
+        font-family: Arial, sans-serif;
+    }
 
-.logged-out {
-    background-color: #cc0000;  /* red to indicate logged-out status */
-}
+    /* Style the logo and its image */
+    .nav-logo {
+        display: flex;
+        align-items: center;
+    }
 
-/* Place the login/logout buttons in top right corner */
-.nav-login-buttons {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-}
+    .nav-logo img {
+        height: 40px; /* Adjust as necessary */
+        width: auto;
+        margin-right: 0.5rem;
+    }
+
+    /* Style the nav links */
+    .nav-link {
+        background-color: #555; /* Button background color */
+        color: white; /* Text color */
+        padding: 0.5rem 1rem;
+        margin: 0 1rem ;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    /* Style for the Sign In button */
+    .login-btn {
+        background-color: #007BFF; /* Different color for the Sign In button. Adjust if needed */
+    }
+
+    /* Hover effect for the nav links */
+    .nav-link:hover {
+        background-color: #777;
+    }
+
+    /* Hover effect for the Sign In button */
+    .login-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .spacer {
+        flex-grow: 1;
+    }
+    
+ 
+    .left-padding, .right-padding {
+        flex: 2; /* This makes sure they take up equal space on either side */
+        background-color: #e5e5e5; /* Adjust this color to your desired side padding color */
+    }
+    
+    .main-content {
+        flex: 7; /* This makes sure the main content is twice as wide as each padding */
+        background-color: #fff; /* Adjust this color to your desired main content background color */
+    }
+
+        /* To ensure footer sticks to the bottom */
+        footer {
+            margin-top: auto;
+        }
+
+
+
+        /* Web Page Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                font-size: 1rem; /* you can adjust this value */
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            body {
+                font-size: 1.25rem; /* you can adjust this value */
+            }
+        }
+
+
