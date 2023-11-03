@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Song, User
 from django.db.models import Count
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Song, User
+from .forms import SongDeleteForm
+from .forms import SongAddForm
+from .forms import SongEditForm
+
+
 
 # Base_template/index.html
 class HomeListView(ListView):
@@ -62,6 +68,50 @@ def song_search(request):
     query = request.GET.get('query')
     songs = Song.objects.filter(name__icontains=query)
     return render(request, 'search_results.html', {'songs': songs})
+
+
+
+def add_song(request):
+    if request.method == 'POST':
+        form = SongAddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('song_list')
+    else:
+        form = SongAddForm()
+    return render(request, 'add_song.html', {'form': form})
+
+def edit_song(request, song_id):
+    song = get_object_or_404(Song, id=song_id)
+    if request.method == 'POST':
+        form = SongEditForm(request.POST, instance=song)
+        if form.is_valid():
+            form.save()
+            return redirect('song_detail', song_id=song.id)
+    else:
+        form = SongEditForm(instance=song)
+    return render(request, 'edit_song.html', {'form': form})
+
+
+
+def delete_song(request, song_id):
+    song = get_object_or_404(Song, id=song_id)
+    if request.method == 'POST':
+        form = SongDeleteForm(request.POST, instance=song)
+        if form.is_valid():
+            song.delete()
+            return redirect('song_list')
+    else:
+        form = SongDeleteForm(instance=song)
+    return render(request, 'delete_song.html', {'form': form, 'song': song})
+
+def song_list(request):
+    songs = Song.objects.all()
+    return render(request, 'song_list.html', {'songs': songs})
+
+def song_detail(request, song_id):
+    song = get_object_or_404(Song, id=song_id)
+    return render(request, 'song_detail.html', {'song': song})
 
 
 # Additional functions or class-based views for login, logout, user management, etc. can be added accordingly.

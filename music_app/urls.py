@@ -20,4 +20,11 @@ path('songs/<int:pk>/edit/', views.SongUpdateView.as_view(), name='song_edit'),
 path('songs/<int:pk>/delete/', views.SongDeleteView.as_view(), name='song_delete'),
 path('users/<int:pk>/', views.UserDetailView.as_view(), name='user_detail'),
 path('search/', views.song_search, name='song_search'),
+
+path('songs/', views.song_list, name='song_list'),  # This 'name' is used for the redirect
+path('songs/<int:song_id>/', views.song_detail, name='song_detail'),
+path('song/add/', views.add_song, name='song_add'),
+path('song/<int:song_id>/edit/', views.edit_song, name='song_edit'),
+path('song/<int:song_id>/delete/', views.delete_song, name='song_delete'),
+
 ]
