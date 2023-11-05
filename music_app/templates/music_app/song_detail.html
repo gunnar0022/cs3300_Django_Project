@@ -1,0 +1,23 @@
+{% extends 'base_template.html' %}
+{% load django_bootstrap5  %}
+
+{% block content %}
+    <h2>{{ song.name }}</h2>
+
+    <p><strong>Instrument:</strong> {{ song.instrument }}</p>
+    <p><strong>Genre:</strong> {{ song.genre }}</p>
+
+    <h4>Users who like this song:</h4>
+    <ul class="list-group">
+        {% for user in song.users.all %}
+        <li class="list-group-item">{{ user.name }}</li>
+        {% empty %}
+        <li class="list-group-item">No users have liked this song yet.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-4">
+        <a href="{% url 'song_edit' song.id %}" class="btn btn-custom">Edit Song</a>
+        <a href="{% url 'song_delete' song.id %}" class="btn btn-delete">Delete Song</a>
+    </div>
+{% endblock %}

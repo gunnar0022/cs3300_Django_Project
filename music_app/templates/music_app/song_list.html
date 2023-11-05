@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="d-flex flex-column h-100">  {# Flexbox container #}
+    <h2>All Songs</h2>
+
+    <ul class="list-group flex-grow-1 mb-3">  {# flex-grow-1 allows the list to occupy available space, pushing the button to the bottom #}
+        {% for song in songs %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+            <div>
+                <span class="badge bg-secondary">{{ song.instrument }}</span>
+                <span class="badge bg-info">{{ song.genre }}</span>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No songs available.</li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <a href="{% url 'song_add' %}" class="btn btn-custom">Add New Song</a>
+    </div>
+</div>  {# End of Flexbox container #}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% load static %}
+{% load django_bootstrap5  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music App</title>
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <!-- Logo linking to home -->
+        <a class="nav-logo" href="{% url 'home' %}">
+            <img src="/static/images/logo.png " alt="Music App Logo Button" style="height: 100px;">
+        </a>
+        
+        <!-- Other navbar items -->
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+        <a class="nav-link" href="{% url 'song_list' %}">Song List</a>
+           
+        <!-- Spacer -->
+        <div class="spacer"></div>
+
+        <!-- Sign In button on the far right -->
+        <a class="nav-link login-btn">Sign In</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- Left padding -->
+        <div class="left-padding"></div>
+    
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container mt-4">
+                {% block content %}
+                    <!-- Content of child templates will go here -->
+                {% endblock %}
+            </div>
+        </div>
+    
+        <!-- Right padding -->
+        <div class="right-padding"></div>
+    </div>
+
+    <footer class="bg-light mt-5 py-3">
+        <div class="container text-center">
+            <p>&copy; 2023 Music App. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
