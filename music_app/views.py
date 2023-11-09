@@ -114,4 +114,4 @@ def song_detail(request, song_id):
     return render(request, 'song_detail.html', {'song': song})
 
 
-# Additional functions or class-based views for login, logout, user management, etc. can be added accordingly.
+# Additional functions or class-based views for login, logout, user management, etc. will be added accordingly.

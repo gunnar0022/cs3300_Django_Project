@@ -4,14 +4,12 @@ from django.db import models
 class Song(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Name')
     INSTRUMENT_CHOICES = [
-        # Add your choices here. Example:
         ('guitar', 'Guitar'),
         ('piano', 'Piano'),
     ]
     instrument = models.CharField(max_length=255, choices=INSTRUMENT_CHOICES, verbose_name='Instrument')
     
     GENRE_CHOICES = [
-        # Add your choices here. Example:
         ('rock', 'Rock'),
         ('jazz', 'Jazz'),
     ]
