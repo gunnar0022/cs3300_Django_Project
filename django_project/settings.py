@@ -48,6 +48,8 @@ AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 ]
 
+AUTH_PROFILE_MODULE = 'your_app.UserProfile'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

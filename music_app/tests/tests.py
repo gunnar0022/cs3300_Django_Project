@@ -80,3 +80,6 @@ class SongTemplateTests(TestCase):
         self.assertTemplateUsed(response, 'song_detail.html')
         self.assertContains(response, self.song.name)
         self.assertContains(response, self.song.genre)
+
+
+

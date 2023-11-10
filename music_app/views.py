@@ -3,12 +3,17 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.db.models import Count
 from django.urls import reverse_lazy
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Song, User
+from django.contrib.auth import login, authenticate
+from .models import Song
 from .forms import SongDeleteForm
 from .forms import SongAddForm
 from .forms import SongEditForm
+from .models import UserProfile
+from django.views import generic
+
 
 
 
@@ -51,15 +56,15 @@ class SongDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'song_confirm_delete.html'
     success_url = reverse_lazy('song_list')
 
-# User Detail Page
+# UserProfile Detail Page
 class UserDetailView(DetailView):
-    model = User
+    model = UserProfile
     template_name = 'user_detail.html'
     context_object_name = 'user'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = get_object_or_404(User, pk=self.kwargs['pk'])
+        user = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
         context['songs'] = user.songs.all()
         return context
 
@@ -114,4 +119,32 @@ def song_detail(request, song_id):
     return render(request, 'song_detail.html', {'song': song})
 
 
-# Additional functions or class-based views for login, logout, user management, etc. will be added accordingly.
+# Login view
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')  # Redirect to home page or wherever you want
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+# Registration view
+def register_request(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')  # Redirect to home page or wherever you want
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})

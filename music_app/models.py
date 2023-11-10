@@ -1,5 +1,6 @@
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import User
+
 
 class Song(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Name')
@@ -14,15 +15,16 @@ class Song(models.Model):
         ('jazz', 'Jazz'),
     ]
     genre = models.CharField(max_length=255, choices=GENRE_CHOICES, verbose_name='Genre')
-    users = models.ManyToManyField('User', related_name='songs', blank=True)
+    users = models.ManyToManyField('UserProfile', related_name='songs', blank=True)
 
     def __str__(self):
         return self.name
 
-class User(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Name')
-    email = models.EmailField(unique=True, verbose_name='Email')
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    liked_songs = models.ManyToManyField('Song', related_name='liked_by', blank=True)
+    learned_songs = models.ManyToManyField('Song', related_name='learned_by', blank=True)
     bio = models.TextField(blank=True, verbose_name='Bio')
 
     def __str__(self):
-        return self.name
+        return self.user.username
