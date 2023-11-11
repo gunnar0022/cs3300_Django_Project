@@ -1,5 +1,13 @@
-<form method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete the song "{{ song.name }}"?</p>
-    <button type="submit">Confirm Delete</button>
-</form>
+{% extends 'base_template.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Delete Song</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the song "{{ song.name }}"?</p>
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    </form>
+</div>
+{% endblock %}

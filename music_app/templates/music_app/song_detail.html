@@ -2,6 +2,15 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
     <h2>{{ song.name }}</h2>
 
     <p><strong>Instrument:</strong> {{ song.instrument }}</p>
@@ -19,6 +28,8 @@
     <div class="mt-4">
         {% if request.user.is_authenticated %}
             <a href="{% url 'song_edit' song.id %}" class="btn btn-custom">Edit Song</a>
+            <a href="{% url 'add_to_liked_songs' song.id %}" class="btn btn-custom">Add to 'Liked Songs'</a>
+
         {% else %}
             <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-custom">Login to Edit</a>
         {% endif %}

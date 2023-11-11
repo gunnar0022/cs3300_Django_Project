@@ -1,5 +1,13 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-custom">Submit</button>
-</form>
+{% extends 'base_template.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Song</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Add Song</button>
+    </form>
+</div>
+{% endblock %}

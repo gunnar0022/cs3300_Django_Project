@@ -1,21 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
-from django.urls import reverse_lazy
-from django.urls import reverse
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from .models import Song
 from .forms import SongDeleteForm
 from .forms import SongAddForm
 from .forms import SongEditForm
 from .models import UserProfile
-from django.views import generic
 
-
+from django.urls import reverse_lazy
+from django.urls import reverse
 
 
 # Base_template/index.html
@@ -163,3 +164,17 @@ class UserDetailView(DetailView):
         context['liked_songs'] = self.object.liked_songs.all()
         return context
     
+
+@login_required
+def add_to_liked_songs(request, song_id):
+    song = get_object_or_404(Song, id=song_id)
+    user_profile = request.user.userprofile
+    user_profile.liked_songs.add(song)
+
+    if song not in user_profile.liked_songs.all():
+        user_profile.liked_songs.add(song)
+        messages.success(request, 'Song added to your Want to Learn list!')
+    else:
+        messages.info(request, 'Song is already in your Want to Learn list!')
+
+    return redirect('song_detail', pk=song_id)

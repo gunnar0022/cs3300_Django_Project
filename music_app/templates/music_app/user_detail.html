@@ -16,13 +16,18 @@
     </div>
     
     <!-- Display liked songs -->
-    <div class="liked-songs">
-        <h2>Liked Songs</h2>
-        {% for song in userprofile.liked_songs.all %}
-        <!-- Template code for displaying each song -->
-        {% empty %}
+<!-- Display liked songs -->
+<div class="liked-songs">
+    <h2>Liked Songs</h2>
+    {% for song in userprofile.liked_songs.all %}
+        <div class="song-box">
+            <!-- Adjust the following line to link to your song detail view -->
+            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+        </div>
+    {% empty %}
         <p>No liked songs yet.</p>
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
+
 </div>
 {% endblock %}

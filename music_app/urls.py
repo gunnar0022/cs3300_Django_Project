@@ -4,6 +4,7 @@ from .views import login_request, register_request
 from django.http import HttpResponse
 from django.contrib.auth.views import LogoutView
 from .views import UserDetailView
+from .views import add_to_liked_songs
 
 
 def my_view(request):
@@ -27,6 +28,7 @@ path('login/', login_request, name='login'),
 path('register/', register_request, name='register'),
 path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 path('user/<int:pk>/', views.UserDetailView.as_view(), name='user_detail'),
+path('songs/<int:song_id>/liked_songs/', add_to_liked_songs, name='add_to_liked_songs'),
 
 
 ]
