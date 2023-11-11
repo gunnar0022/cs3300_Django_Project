@@ -133,3 +133,24 @@
         }
 
 
+/* Place this in your stylesheet.css or within a <style> tag in the base template */
+.song-lists {
+    display: flex;
+    justify-content: space-around;
+}
+
+.learned-songs, .want-to-learn-songs {
+    width: 48%;
+}
+
+.song-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.song-box a {
+    text-decoration: none;
+    color: inherit;
+}

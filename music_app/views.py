@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from .models import Song
 from .forms import SongDeleteForm
 from .forms import SongAddForm
@@ -148,3 +149,17 @@ def register_request(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+
+
+class UserDetailView(DetailView):
+    model = UserProfile
+    template_name = 'user_detail.html'
+    context_object_name = 'userprofile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['learned_songs'] = self.object.learned_songs.all()
+        context['liked_songs'] = self.object.liked_songs.all()
+        return context
+    

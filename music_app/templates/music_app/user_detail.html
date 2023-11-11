@@ -1,0 +1,28 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+<div class="user-profile">
+    <h1>{{ userprofile.user.username }}</h1>
+    <p>{{ userprofile.bio }}</p>
+    
+    <!-- Display learned songs -->
+    <div class="learned-songs">
+        <h2>Learned Songs</h2>
+        {% for song in userprofile.learned_songs.all %}
+        <!-- Template code for displaying each song -->
+        {% empty %}
+        <p>No songs learned yet.</p>
+        {% endfor %}
+    </div>
+    
+    <!-- Display liked songs -->
+    <div class="liked-songs">
+        <h2>Liked Songs</h2>
+        {% for song in userprofile.liked_songs.all %}
+        <!-- Template code for displaying each song -->
+        {% empty %}
+        <p>No liked songs yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

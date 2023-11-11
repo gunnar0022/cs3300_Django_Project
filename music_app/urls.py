@@ -3,6 +3,8 @@ from . import views
 from .views import login_request, register_request
 from django.http import HttpResponse
 from django.contrib.auth.views import LogoutView
+from .views import UserDetailView
+
 
 def my_view(request):
     return HttpResponse("Hello, World!")
@@ -24,5 +26,7 @@ path('song/<int:song_id>/delete/', views.delete_song, name='song_delete'),
 path('login/', login_request, name='login'),
 path('register/', register_request, name='register'),
 path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+path('user/<int:pk>/', views.UserDetailView.as_view(), name='user_detail'),
+
 
 ]

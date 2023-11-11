@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'music_app',
     'django_bootstrap5',
-
+    'music_app.apps.MusicAppConfig',  # This is the full path to the AppConfig subclass
 ]
 
 # Add support for authenticating users
@@ -49,6 +48,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_PROFILE_MODULE = 'your_app.UserProfile'
+
+LOGIN_URL = 'login'
 
 
 MIDDLEWARE = [
