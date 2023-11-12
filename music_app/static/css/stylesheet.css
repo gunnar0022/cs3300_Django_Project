@@ -47,6 +47,16 @@
         background-color: #6c0000;  /* Darker green on hover */
     }
     
+    .form-box {
+        background-color: #f8f9fa; /* Light gray background */
+        border: 1px solid #ddd;    /* Light gray border */
+        border-radius: 10px;       /* Rounded corners */
+        padding: 20px;             /* Padding inside the box */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-top: 10vh;          /* Pushed towards the top 1/4 of the page */
+        width: 100%;
+        max-width: 500px;          /* Max width for the form box */
+    }
     
 
 /* Style the navbar */
@@ -84,7 +94,7 @@
 
     /* Style for the Sign In button */
     .login-btn {
-        background-color: #007BFF; /* Different color for the Sign In button. Adjust if needed */
+        background-color: #e8f1fa; /* Different color for the Sign In button. Adjust if needed */
     }
 
     /* Hover effect for the nav links */
@@ -108,8 +118,8 @@
     }
     
     .main-content {
-        flex: 7; /* This makes sure the main content is twice as wide as each padding */
-        background-color: #fff; /* Adjust this color to your desired main content background color */
+        flex: 8; /* This makes sure the main content is twice as wide as each padding */
+        background-color: rgb(206, 234, 252) ; /* Adjust this color to your desired main content background color */
     }
 
         /* To ensure footer sticks to the bottom */
@@ -133,24 +143,3 @@
         }
 
 
-/* Place this in your stylesheet.css or within a <style> tag in the base template */
-.song-lists {
-    display: flex;
-    justify-content: space-around;
-}
-
-.learned-songs, .want-to-learn-songs {
-    width: 48%;
-}
-
-.song-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.song-box a {
-    text-decoration: none;
-    color: inherit;
-}
