@@ -16,8 +16,13 @@
     <ul class="list-group">
         {% for song in songs %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
-            <span class="badge bg-primary rounded-pill">{{ song.user_count }} Users</span>
+
+            <div class="song-link-box">
+                <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+
+
+            </div>
+
         </li>
         {% empty %}
         <li class="list-group-item">No songs found.</li>

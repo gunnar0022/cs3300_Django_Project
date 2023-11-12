@@ -143,3 +143,65 @@
         }
 
 
+        .song-link-box {
+            display: block; /* Change to block for better control */
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 8px; /* Rounded corners */
+            padding: 15px; /* Padding inside the box */
+            margin: 10px 0; /* Vertical margin for spacing between boxes */
+            text-decoration: none; /* Removing underline from links */
+            color: #333; /* Dark text color */
+            transition: box-shadow 0.3s; /* Smooth transition for hover effect */
+        }
+        
+        .song-link-box:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+        }
+        
+        .song-link-box a {
+            color: #0056b3; /* Link color */
+            font-size: 1.2em; /* Larger font size for song name */
+            font-weight: bold; /* Bold font weight */
+            text-decoration: none; /* Removing underline */
+            display: block; /* Making the link a block element */
+            margin-bottom: 5px; /* Spacing between link and badges */
+        }
+        
+        .song-link-box .badge {
+            font-size: 0.85em; /* Slightly smaller font size for badges */
+            margin-right: 5px; /* Spacing between badges */
+        }
+                
+        /* Style for the dropdown container */
+        .nav-item.dropdown {
+            position: relative;
+        }
+
+        /* Dropdown Menu initially hidden */
+        .nav-item .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Dropdown Menu visible on hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Dropdown items style */
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Hover color for dropdown items */
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }

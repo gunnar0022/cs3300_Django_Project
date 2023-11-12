@@ -20,10 +20,14 @@
 <div class="liked-songs">
     <h2>Liked Songs</h2>
     {% for song in userprofile.liked_songs.all %}
-        <div class="song-box">
-            <!-- Adjust the following line to link to your song detail view -->
-            <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+    <div class="song-link-box">
+        <a href="{% url 'song_detail' song.id %}">{{ song.name }}</a>
+        <div>
+            <span class="badge bg-secondary">{{ song.instrument }}</span>
+            <span class="badge bg-info">{{ song.genre }}</span>
         </div>
+    </div>
+    
     {% empty %}
         <p>No liked songs yet.</p>
     {% endfor %}
