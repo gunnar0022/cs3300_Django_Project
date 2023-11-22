@@ -8,9 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Music App</title>
     <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: url("{% static 'images/background.png' %}") no-repeat center center fixed; 
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-
+ 
     <nav class="navbar">
         <!-- Logo linking to home -->
         <a class="nav-logo" href="{% url 'home' %}">
@@ -59,11 +68,12 @@
         <div class="right-padding"></div>
     </div>
 
-    <footer class="bg-light mt-5 py-3">
+    <footer style="background-color: black; color: white;" class="mt-5 py-3">
         <div class="container text-center">
             <p>&copy; 2023 Music App. All rights reserved.</p>
         </div>
     </footer>
+    
 
 
 

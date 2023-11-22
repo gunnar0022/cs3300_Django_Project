@@ -1,7 +1,12 @@
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* ensures the content takes up at least the full viewport height */
+
+
+    .main-content {
+        flex: 8; /* Adjusted for a larger main content area */
+        background-color: rgba(51, 153, 255, 0.7)
+    }
+
+    .left-padding, .right-padding {
+        flex: 2; /* These will show the background image */
     }
 
     .content-wrapper {
@@ -64,7 +69,7 @@
         display: flex;
        
         align-items: center;
-        background-color: #10028f; /* Change this to your preferred navbar color */
+        background-color: #122b47, 1,; /* Change this to your preferred navbar color */
         padding: 1rem 2rem;
         font-family: Arial, sans-serif;
     }
@@ -112,34 +117,12 @@
     }
     
  
-    .left-padding, .right-padding {
-        flex: 2; /* This makes sure they take up equal space on either side */
-        background-color: #e5e5e5; /* Adjust this color to your desired side padding color */
-    }
-    
-    .main-content {
-        flex: 8; /* This makes sure the main content is twice as wide as each padding */
-        background-color: rgb(206, 234, 252) ; /* Adjust this color to your desired main content background color */
-    }
+  
+ 
 
         /* To ensure footer sticks to the bottom */
         footer {
             margin-top: auto;
-        }
-
-
-
-        /* Web Page Responsiveness */
-        @media (max-width: 768px) {
-            body {
-                font-size: 1rem; /* you can adjust this value */
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            body {
-                font-size: 1.25rem; /* you can adjust this value */
-            }
         }
 
 
@@ -204,4 +187,19 @@
         /* Hover color for dropdown items */
         .dropdown-menu a:hover {
             background-color: #ddd;
+        }
+
+
+        
+        /* Web Page Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                font-size: 1rem; /* you can adjust this value */
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            body {
+                font-size: 1.25rem; /* you can adjust this value */
+            }
         }
