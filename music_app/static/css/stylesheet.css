@@ -2,7 +2,7 @@
 
     .main-content {
         flex: 8; /* Adjusted for a larger main content area */
-        background-color: rgba(51, 153, 255, 0.7)
+        background-color: rgba(51, 153, 255, 0.8)
     }
 
     .left-padding, .right-padding {
@@ -69,7 +69,7 @@
         display: flex;
        
         align-items: center;
-        background-color: #122b47, 1,; /* Change this to your preferred navbar color */
+        background-color: rgba(19, 42, 69, 1);
         padding: 1rem 2rem;
         font-family: Arial, sans-serif;
     }
