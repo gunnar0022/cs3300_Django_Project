@@ -4,12 +4,12 @@
 {% block content %}
 <div class="container mt-4" style="display: flex; justify-content: center; color: black;">
     <div class="form-box">
-        <h2 class="text-center">Delete Song</h2>
+        <h2 class="text-center">Rate the Song</h2>
         <form method="post" class="form">
             {% csrf_token %}
-            <p class="text-center">Are you sure you want to delete the song "{{ song.name }}"?</p>
+            {% bootstrap_form form %}
             <div class="text-center">
-                <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                <button type="submit" class="btn btn-primary">Submit Rating</button>
             </div>
         </form>
     </div>

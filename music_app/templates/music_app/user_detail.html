@@ -5,16 +5,30 @@
     <h1>{{ userprofile.user.username }}</h1>
     <p>{{ userprofile.bio }}</p>
     
-    <!-- Display learned songs -->
-    <div class="learned-songs">
-        <h2>Learned Songs</h2>
-        {% for song in userprofile.learned_songs.all %}
-        <!-- Template code for displaying each song -->
-        {% empty %}
+ <!-- Display learned songs -->
+<div class="learned-songs">
+    <h2>Learned Songs</h2>
+    {% for item in learned_songs_with_ratings %}
+        <div class="song-item">
+            <h3><a href="{% url 'song_detail' item.song.id %}">{{ item.song.name }}</a></h3>
+            <p>Instrument: {{ item.song.instrument }}</p>
+            <p>Genre: {{ item.song.genre }}</p>
+            
+            <!-- Display user's rating for the song if available -->
+            {% if item.rating %}
+                <p>Your Rating:</p>
+                <ul>
+                    <li>Enjoyment: {{ item.rating.enjoyment }}</li>
+                    <li>Difficulty: {{ item.rating.difficulty }}</li>
+                    <li>Comments: {{ item.rating.comments }}</li>
+                </ul>
+            {% endif %}
+        </div>
+    {% empty %}
         <p>No songs learned yet.</p>
-        {% endfor %}
-    </div>
-    
+    {% endfor %}
+</div>
+
     <!-- Display liked songs -->
 <!-- Display liked songs -->
 <div class="liked-songs">
@@ -26,11 +40,17 @@
             <span class="badge bg-secondary">{{ song.instrument }}</span>
             <span class="badge bg-info">{{ song.genre }}</span>
         </div>
+        <!-- Form to move song to learned list -->
+        <form method="post" action="{% url 'user_detail' userprofile.user.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="song_id" value="{{ song.id }}">
+            <button type="submit" name="move_to_learned" class="btn btn-primary">Move to Learned</button>
+        </form>
     </div>
-    
     {% empty %}
         <p>No liked songs yet.</p>
     {% endfor %}
+    
 </div>
 
 </div>

@@ -2,7 +2,7 @@
 
     .main-content {
         flex: 8; /* Adjusted for a larger main content area */
-        background-color: rgba(51, 153, 255, 0.8)
+        background-color: rgba(33, 102, 171, 0.8)
     }
 
     .left-padding, .right-padding {

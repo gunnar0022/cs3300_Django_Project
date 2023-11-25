@@ -9,11 +9,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 
+from .models import UserProfile
 from .models import Song
+from .models import Rating
 from .forms import SongDeleteForm
 from .forms import SongAddForm
 from .forms import SongEditForm
-from .models import UserProfile
+from .forms import RatingForm
 
 from django.urls import reverse_lazy
 from django.urls import reverse
@@ -160,10 +162,54 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['learned_songs'] = self.object.learned_songs.all()
+        
+        # Adding liked songs
         context['liked_songs'] = self.object.liked_songs.all()
+
+        # Adding learned songs with ratings
+        learned_songs_with_ratings = []
+        for song in self.object.learned_songs.all():
+            song_data = {'song': song}
+            user_rating = Rating.objects.filter(user_profile=self.object, song=song).first()
+            song_data['rating'] = user_rating
+            learned_songs_with_ratings.append(song_data)
+
+        context['learned_songs_with_ratings'] = learned_songs_with_ratings
+
         return context
     
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if 'move_to_learned' in request.POST:
+            song_id = request.POST.get('song_id')
+            song = Song.objects.get(id=song_id)
+
+            # Move the song from liked to learned
+            self.object.liked_songs.remove(song)
+            self.object.learned_songs.add(song)
+
+            return redirect('rate_song', song_id=song_id)
+
+        return super().post(request, *args, **kwargs)
+
+
+def rate_song(request, song_id):
+    song = Song.objects.get(id=song_id)
+    user_profile = request.user.userprofile
+
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user_profile = user_profile
+            rating.song = song
+            rating.save()
+            return redirect('user_detail', pk=user_profile.user.id)
+    else:
+        form = RatingForm()
+
+    return render(request, 'song_rating_form.html', {'form': form, 'song': song})
+
 
 @login_required
 def add_to_liked_songs(request, song_id):
