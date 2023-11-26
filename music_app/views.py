@@ -238,6 +238,6 @@ def add_to_liked_songs(request, song_id):
         user_profile.liked_songs.add(song)
         messages.success(request, 'Song added to your Want to Learn list!')
     else:
-        messages.info(request, 'Song is already in your Want to Learn list!')
+        messages.info(request, 'Song has been added to your learn list.')
 
     return redirect('song_detail', pk=song_id)

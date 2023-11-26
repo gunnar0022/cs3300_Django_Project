@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from .models import UserProfile
-from .models import Song 
+from .models import Song, Rating
 
 # Define an inline admin descriptor for the UserProfile model
 class UserProfileInline(admin.StackedInline):
@@ -20,3 +20,4 @@ admin.site.register(User, UserAdmin)
 
 admin.site.register(UserProfile )
 admin.site.register(Song)
+admin.site.register(Rating)
