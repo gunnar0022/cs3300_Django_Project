@@ -29,6 +29,4 @@ path('user/<int:pk>/', UserDetailView.as_view(), name='user_detail'),
 path('songs/<int:song_id>/liked_songs/', add_to_liked_songs, name='add_to_liked_songs'),
 path('rate_song/<int:song_id>/', rate_song, name='rate_song'),
 
-
-
 ]

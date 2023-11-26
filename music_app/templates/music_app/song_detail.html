@@ -12,6 +12,7 @@
 {% endif %}
 
     <h2>{{ song.name }}</h2>
+    <p>Average Rating: {{ song.average_enjoyment }}</p> <!-- Display the average rating -->
 
     <p><strong>Instrument:</strong> {{ song.instrument }}</p>
     <p><strong>Genre:</strong> {{ song.genre }}</p>
@@ -29,5 +30,20 @@
         {% if request.user.is_superuser %}
             <a href="{% url 'song_delete' song.id %}" class="btn btn-delete">Delete Song</a>
         {% endif %}
+
+
     </div>
+   
+  <!-- Display User's Rating and Review -->
+    {% if user_rating %}
+    <div class="user-review">
+      <h3>Your Review</h3>
+      <p>Enjoyment: {{ user_rating.enjoyment }}</p>
+      <p>Difficulty: {{ user_rating.difficulty }}</p>
+      <p>Comments: {{ user_rating.comments }}</p>
+    </div>
+    {% endif %}
+      
+
+
 {% endblock %}

@@ -5,31 +5,33 @@
     <h1>{{ userprofile.user.username }}</h1>
     <p>{{ userprofile.bio }}</p>
     
- <!-- Display learned songs -->
+<!-- Display learned songs -->
 <div class="learned-songs">
     <h2>Learned Songs</h2>
     {% for item in learned_songs_with_ratings %}
-        <div class="song-item">
+        <div class="song-link-box">
             <h3><a href="{% url 'song_detail' item.song.id %}">{{ item.song.name }}</a></h3>
-            <p>Instrument: {{ item.song.instrument }}</p>
-            <p>Genre: {{ item.song.genre }}</p>
-            
+            <div>
+                <span class="badge bg-secondary">{{ item.song.instrument }}</span>
+                <span class="badge bg-info">{{ item.song.genre }}</span>
+                <!-- Display the average rating here -->
+            </div>
             <!-- Display user's rating for the song if available -->
             {% if item.rating %}
-                <p>Your Rating:</p>
-                <ul>
-                    <li>Enjoyment: {{ item.rating.enjoyment }}</li>
-                    <li>Difficulty: {{ item.rating.difficulty }}</li>
-                    <li>Comments: {{ item.rating.comments }}</li>
-                </ul>
+                <div>
+                    <span class="badge bg-success">Personal Ratings:: Enjoyment: {{ item.rating.enjoyment }}</span>
+                    <span class="badge bg-danger">Difficulty: {{ item.rating.difficulty }}</span>
+                </div>
+                
             {% endif %}
+           <p> Average Rating: {{ item.song.average_enjoyment }}</p>
         </div>
     {% empty %}
         <p>No songs learned yet.</p>
     {% endfor %}
 </div>
 
-    <!-- Display liked songs -->
+
 <!-- Display liked songs -->
 <div class="liked-songs">
     <h2>Liked Songs</h2>
@@ -39,6 +41,8 @@
         <div>
             <span class="badge bg-secondary">{{ song.instrument }}</span>
             <span class="badge bg-info">{{ song.genre }}</span>
+            <!-- Display the average rating here -->
+            <p>Average Rating: {{ song.average_enjoyment }}</p> 
         </div>
         <!-- Form to move song to learned list -->
         <form method="post" action="{% url 'user_detail' userprofile.user.id %}">
@@ -50,8 +54,8 @@
     {% empty %}
         <p>No liked songs yet.</p>
     {% endfor %}
-    
 </div>
+
 
 </div>
 {% endblock %}

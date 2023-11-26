@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Count
+from django.db.models import Avg
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -28,7 +30,11 @@ class HomeListView(ListView):
     context_object_name = 'songs'
 
     def get_queryset(self):
-        return Song.objects.annotate(user_count=Count('users')).order_by('-user_count')[:10]
+        # Annotate each song with its average enjoyment rating
+        return Song.objects.annotate(
+            average_rating=Avg('ratings__enjoyment')
+        ).order_by('-average_rating')[:10]
+    
 
 # Song List Page
 class SongListView(ListView):
@@ -42,11 +48,22 @@ class SongCreateView(LoginRequiredMixin, CreateView):
     template_name = 'song_form.html'
     fields = ['name', 'instrument', 'genre']
 
-# Song Detail Page
+
 class SongDetailView(DetailView):
     model = Song
     template_name = 'song_detail.html'
     context_object_name = 'song'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        song = self.get_object()
+
+        if self.request.user.is_authenticated:
+            user_profile = self.request.user.userprofile
+            user_rating = Rating.objects.filter(user_profile=user_profile, song=song).first()
+            context['user_rating'] = user_rating
+
+        return context
 
 # For editing a song.
 class SongUpdateView(LoginRequiredMixin, UpdateView):
